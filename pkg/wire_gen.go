@@ -13,16 +13,16 @@ import (
 	"net/http"
 )
 
-// Injectors from template.go:
+// Injectors from app.go:
 
-func InitializeGoChiWire() (*http.Server, error) {
+func InitializeApp() (*http.Server, error) {
 	handler := handlers.NewRouter()
 	configConfig := config.NewConfig()
 	httpServer := server.CreateServer(handler, configConfig)
 	return httpServer, nil
 }
 
-// template.go:
+// app.go:
 
 // GoChiWireSet - creates a wire set for the whole application.
-var GoChiWireSet = wire.NewSet(server.ServerSet)
+var AppSet = wire.NewSet(server.ServerSet)

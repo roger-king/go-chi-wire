@@ -12,10 +12,10 @@ import (
 )
 
 // GoChiWireSet - creates a wire set for the whole application.
-var GoChiWireSet = wire.NewSet(server.ServerSet)
+var AppSet = wire.NewSet(server.ServerSet)
 
 // InitializeGoChiWire - instructs wire to build dependency injection.
-func InitializeGoChiWire() (*http.Server, error) {
-	wire.Build(GoChiWireSet)
+func InitializeApp() (*http.Server, error) {
+	wire.Build(AppSet)
 	return nil, nil
 }
