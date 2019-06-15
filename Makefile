@@ -1,24 +1,22 @@
 DOCKER_TARGET?=ci
 
 setup:
-	go get github.com/google/wire/cmd/wire
+	go run github.com/google/wire/cmd/wire
 	go mod vendor
+	echo "To start server: make start"
 
-start:
+start: wire
 	go run cmd/main.go
-
-generate: gqlgen wire
 
 wire:
 	cd pkg && go generate
 
-test: gen-templates
+test:
 	cd pkg && go test
 	
 cleanup:
 	rm -rf ./build
 	rm -rf ./vendor
-	rm -rf ${GOPATH}/bin/nimbus
 
 default:
 	setup
