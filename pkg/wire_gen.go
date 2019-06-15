@@ -7,6 +7,7 @@ package root
 
 import (
 	"github.com/google/wire"
+	"github.com/roger-king/go-chi-wire/pkg/config"
 	"github.com/roger-king/go-chi-wire/pkg/handlers"
 	"github.com/roger-king/go-chi-wire/pkg/server"
 	"net/http"
@@ -16,7 +17,8 @@ import (
 
 func InitializeGoChiWire() (*http.Server, error) {
 	handler := handlers.NewRouter()
-	httpServer := server.CreateServer(handler)
+	configConfig := config.NewConfig()
+	httpServer := server.CreateServer(handler, configConfig)
 	return httpServer, nil
 }
 

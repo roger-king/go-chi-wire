@@ -15,18 +15,18 @@ type ServerConfig struct {
 	Port  string
 }
 
-// GetConfig - gets configuration
-func GetConfig() *Config {
+// NewConfig - Provider for returning application config.
+func NewConfig() *Config {
 	return &Config{
 		Server: &ServerConfig{
-			GoENV: EnvOrDefaultString("GO_ENV", "local"),
-			Port:  EnvOrDefaultString("PORT", "5000"),
+			GoENV: envOrDefaultString("GO_ENV", "local"),
+			Port:  envOrDefaultString("PORT", "5000"),
 		},
 	}
 }
 
 // EnvOrDefaultString - Returns the environment variable or a prefixed default value (e.g. port)
-func EnvOrDefaultString(envVar string, defaultValue string) string {
+func envOrDefaultString(envVar string, defaultValue string) string {
 	value := os.Getenv(envVar)
 	if value == "" {
 		return defaultValue
