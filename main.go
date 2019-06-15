@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+var replace string
+
 func visit(path string, fi os.FileInfo, err error) error {
 
 	if err != nil {
@@ -30,12 +32,10 @@ func visit(path string, fi os.FileInfo, err error) error {
 		if err != nil {
 			panic(err)
 		}
-		//fmt.Println(string(read))
+
 		fmt.Println(path)
 
-		newContents := strings.Replace(string(read), "roger-king/go-chi-wire", "roger-king/new-repo", -1)
-
-		fmt.Println(newContents)
+		newContents := strings.Replace(string(read), "roger-king/go-chi-wire", replace, -1)
 
 		err = ioutil.WriteFile(path, []byte(newContents), 0)
 		if err != nil {
@@ -48,14 +48,12 @@ func visit(path string, fi os.FileInfo, err error) error {
 }
 
 func main() {
-	// First edit go.mod
-	err := filepath.Walk(".", visit)
-
+	replace = os.Args[1]
+	err := filepath.Walk("pkg", visit)
 	if err != nil {
 		panic(err)
 	}
-
-	err = filepath.Walk("pkg", visit)
+	err = filepath.Walk("cmd", visit)
 	if err != nil {
 		panic(err)
 	}
