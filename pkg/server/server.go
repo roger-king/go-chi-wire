@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/google/wire"
+	// Import .env
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/roger-king/go-chi-wire/pkg/config"
 	"github.com/roger-king/go-chi-wire/pkg/handlers"
@@ -34,5 +35,6 @@ func CreateServer(h http.Handler, c *config.Config) *http.Server {
 		Handler: h,
 	}
 
+	log.Println("Application is now running on: http://localhost:" + port)
 	return server
 }

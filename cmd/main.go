@@ -6,8 +6,6 @@ import (
 )
 
 func main() {
-	server, _ := root.InitializeGoChiWire()
-
-	log.Info("Application is now running")
+	server, _ := root.InitializeApp()
 	log.Fatal(server.ListenAndServe())
 }
