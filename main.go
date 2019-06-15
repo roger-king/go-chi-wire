@@ -35,7 +35,7 @@ func visit(path string, fi os.FileInfo, err error) error {
 
 		fmt.Println(path)
 
-		newContents := strings.Replace(string(read), "roger-king/go-chi-wire", replace, -1)
+		newContents := strings.Replace(string(read), "github.com/roger-king/go-chi-wire", replace, -1)
 
 		err = ioutil.WriteFile(path, []byte(newContents), 0)
 		if err != nil {
